@@ -10,7 +10,10 @@ export const usePlayingInfo = () => {
   const [loading, setLoading] = React.useState(true)
 
   const updateRequest = async () => {
-    const res = await client.getPlaying()
+    const res = await client.getPlaying().catch(err => {
+      console.error(err)
+      return null
+    })
     setRes(res)
     setLoading(false)
   }

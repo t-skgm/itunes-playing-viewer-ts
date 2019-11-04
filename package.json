@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "react-app-rewired build",
+    "build:app": "react-app-rewired build",
+    "build:server": "react-app-rewired build",
     "dev": "concurrently 'yarn dev:app' 'yarn dev:server'",
     "dev:app": "react-app-rewired start",
     "dev:server": "PORT=3001 nodemon src/server/index.ts",
