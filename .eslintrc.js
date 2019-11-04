@@ -58,6 +58,8 @@ module.exports = {
     "object-literal-sort-keys": "off",
     "ordered-imports": "off",
     "react/prop-types": "off",
-    "@typescript-eslint/no-unused-vars": "off"
+    "@typescript-eslint/no-unused-vars": "off",
+    "react/no-unescaped-entities": "off",
+    "react/display-name": "off"
   }
 };

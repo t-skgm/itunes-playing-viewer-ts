@@ -3,12 +3,13 @@ import { consts } from '@/consts'
 import { ApiPlayingRes } from '@/types'
 
 export const apiRoutes = {
-  playing: '/playing'
+  playing: '/playing',
+  static: '/static'
 }
 
 export const client = {
   getPlaying: async (): Promise<ApiPlayingRes> => {
-    const res = await fetch(consts.apiUrl + '/playing')
+    const res = await fetch(consts.apiHost + apiRoutes.playing)
     return res.json()
   }
 }

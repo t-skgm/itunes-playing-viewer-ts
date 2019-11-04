@@ -9,7 +9,8 @@ import { ApiPlayingRes } from '@/types'
 const fsProm = fs.promises
 const router = express.Router()
 
-const buildArtworkPath = (track: TrackStatus) => path.resolve(`${consts.artworkDir}/${track.artist}-${track.title}.jpg`)
+const buildArtworkPath = (track: TrackStatus) =>
+  path.resolve(`.${consts.artworkDir}/${track.artist}-${track.title}.jpg`)
 
 const pathExists = async (pathStr: string) => {
   try {

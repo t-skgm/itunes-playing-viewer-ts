@@ -1,7 +1,6 @@
 import * as React from 'react'
-import { NextComponentType } from 'next'
-import styled from '@emotion/styled'
-import { Layout, TrackInfoArea } from '@/components'
+import styled from 'styled-components'
+import { TrackInfoArea } from '@/components'
 import { consts } from '@/consts'
 import { TrackInfoItem } from '@/types'
 
@@ -13,7 +12,7 @@ const Wrapper = styled.div`
   width: ${bgImageWidth}px;
   height: ${consts.window.height}px;
   padding: 1rem;
-  background-image: url('/static/images/background.jpg');
+  background-image: url('${consts.apiHost}/static/images/background.jpg');
   background-size: ${bgImageWidth}px;
   background-position: 0 bottom;
 `
@@ -43,22 +42,36 @@ const Artwork = styled.img`
   height: ${artworkSize}px;
 `
 
-interface IndexScreenProps {
+interface Props {
   title?: string
   items: TrackInfoItem[]
   artworkPath?: string
 }
 
-export const IndexScreen: NextComponentType<IndexScreenProps> = ({ items, title = '(Stop)', artworkPath }) => (
-  <Layout title={title}>
+const isEqual = (prevProps: Props, nextProps: Props) =>
+  prevProps.title === nextProps.title &&
+  prevProps.artworkPath === nextProps.artworkPath &&
+  // 雑equal
+  prevProps.items[1] &&
+  nextProps.items[1] &&
+  prevProps.items[1].value === nextProps.items[1].value
+
+export const Main: React.FC<Props> = React.memo(
+  ({ items, title = '(Stop)', artworkPath }) => (
     <Wrapper>
+      {console.log('update')}
       <Title>{title}</Title>
       <Detail>
         <ArtworkArea>
-          {artworkPath ? <Artwork src={artworkPath} /> : <Artwork src="/static/images/placeholder-song.png" />}
+          {artworkPath ? (
+            <Artwork src={artworkPath} />
+          ) : (
+            <Artwork src={`${consts.apiHost}/static/images/placeholder-song.png`} />
+          )}
         </ArtworkArea>
         <TrackInfoArea items={items} />
       </Detail>
     </Wrapper>
-  </Layout>
+  ),
+  isEqual
 )

@@ -1,5 +1,5 @@
 export const consts = {
-  apiUrl: 'http://localhost:3001/api',
+  apiHost: 'http://localhost:3001',
   window: {
     // 720p
     // height: 720,
@@ -9,6 +9,6 @@ export const consts = {
     width: 854
   },
   updateRateMs: 2000,
-  artworkDir: './src/static/images/artworks',
-  artworkServerDir: '/static/images/artworks'
+  artworkDirLocal: './static/images/artworks',
+  artworkDir: '/static/images/artworks'
 }

@@ -1,48 +1,21 @@
 import * as React from 'react'
-// import Index from '@/pages/index'
-
-import { client } from '@/services/client'
+import { createGlobalStyle } from 'styled-components'
 import { TrackStatus } from '@/services/jxa/iTunes'
-import { ApiPlayingRes } from '@/types'
-import { IndexScreen } from '@/screens/IndexScreen'
+import { Main } from '@/components'
 import { consts } from '@/consts'
 import { formatInfoItems } from '@/utils/formatInfoItems'
+import { usePlayingInfo } from '@/hooks'
 
-const buildArtworkPath = (track: TrackStatus): string => `${consts.artworkServerDir}/${track.artist}-${track.title}.jpg`
-
-const usePlayingInfo = () => {
-  const [res, setRes] = React.useState<ApiPlayingRes | null>(null)
-  const [loading, setLoading] = React.useState(true)
-  const resSetter = async () => {
-    const res = await client.getPlaying()
-    setRes(res)
-    setLoading(false)
+const GlobalStyle = createGlobalStyle`
+  * {
+    font-family: 'TsukuARdGothic-Regular', 'American Typewriter', sans-serif;
   }
-  React.useEffect(() => {
-    resSetter()
-  })
-  return [res, loading] as const
-}
+`
 
-const Index: React.FC<ApiPlayingRes> = () => {
-  React.useEffect(() => {
-    const intervalID = setInterval(() => {
-      // if (this.props.router) this.props.router.push('/')
-    }, consts.updateRateMs)
+const buildArtworkPath = (track: TrackStatus): string =>
+  `${consts.apiHost}${consts.artworkDir}/${track.artist}-${track.title}.jpg`
 
-    return () => {
-      clearInterval(intervalID!)
-    }
-  }, [])
-
-  // shouldComponentUpdate(nextProps: ApiPlayingRes) {
-  //   if (!this.props.track || !nextProps.track) return true
-  //   if (this.props.track.title === nextProps.track.title && this.props.track.album === nextProps.track.album) {
-  //     return false
-  //   }
-  //   return true
-  // }
-
+export const App = () => {
   const [res, loading] = usePlayingInfo()
   if (!res || loading) return null
 
@@ -52,9 +25,11 @@ const Index: React.FC<ApiPlayingRes> = () => {
     items: track ? formatInfoItems(track) : [],
     artworkPath: track ? buildArtworkPath(track) : undefined
   }
-  return <IndexScreen {...passProps} />
-}
 
-export const App = () => {
-  return <Index />
+  return (
+    <>
+      <GlobalStyle />
+      <Main {...passProps} />
+    </>
+  )
 }
