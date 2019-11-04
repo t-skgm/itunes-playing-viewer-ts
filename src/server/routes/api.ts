@@ -1,6 +1,6 @@
 import * as express from 'express'
-import * as fs from 'fs'
-import * as path from 'path'
+import fs from 'fs'
+import path from 'path'
 import { getITunesStatusJXA, getAlbumArtTdtaStrJXA, TrackStatus } from '@/services/jxa/iTunes'
 import { helpers } from '@/services/jxa/helpers'
 import { consts } from '@/consts'
@@ -43,4 +43,4 @@ router.get('/playing', async (_req, res) => {
   }
 })
 
-export default router
+export const apiRoute = router
