@@ -5,10 +5,11 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
-    "dev": "nodemon src/server/index.ts",
+    "dev:server": "PORT=3001 nodemon src/server/index.ts",
     "test": "react-app-rewired test - env=jsdom",
-    "type-check": "tsc",
     "eject": "react-scripts eject",
+    "type-check": "tsc",
+    "postinstall": "patch-package",
     "typecheck": "tsc -p . --noEmit",
     "lint": "eslint src --ext='.ts,.tsx'"
   },
@@ -20,6 +21,8 @@
     "ky": "0.15.0",
     "lodash": "4.17.15",
     "module-alias": "2.2.1",
+    "patch-package": "^6.2.0",
+    "postinstall-postinstall": "^2.0.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-scripts": "3.2.0",
