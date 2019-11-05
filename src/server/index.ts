@@ -1,8 +1,13 @@
+/* eslint-disable import/first */
+if (process.env.NODE_ENV === 'production') {
+  const moduleAlias = require('module-alias')
+  moduleAlias.addAlias('@', __dirname + '/../')
+}
+
 import express from 'express'
 import path from 'path'
 import * as bodyParser from 'body-parser'
 import { apiRoute } from './routes'
-// require('module-alias/register')
 
 const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000
 

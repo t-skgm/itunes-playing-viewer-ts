@@ -4,6 +4,10 @@
     "module": "commonjs",
     "noEmit": false,
     "sourceMap": true,
-    "outDir": "bin/"
-  }
+    "outDir": "dist/"
+  },
+  "include": [
+    "src/server/**/*",
+    "types/**/*"
+  ]
 }

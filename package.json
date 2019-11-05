@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "start:app": "NODE_ENV=production serve -s build",
+    "start:serer": "NODE_ENV=production PORT=3001 node ./dist/server/index.js",
     "build:app": "react-app-rewired build",
     "build:server": "react-app-rewired build",
     "dev": "concurrently 'yarn dev:app' 'yarn dev:server'",
